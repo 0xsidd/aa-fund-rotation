@@ -17,10 +17,6 @@ async function main() {
     for (let i = 0; i < cycles; i++) {
       console.log(`\n Cycle ${i + 1} of ${cycles}`);
 
-      if (i > 0) {
-        await wallet.withdrawFromSilo();
-      }
-
       // First move to Aave
       console.log("Moving funds to Aave...");
       await wallet.approveAndSupplyToAave(AMOUNT);
@@ -42,6 +38,11 @@ async function main() {
       if (i < cycles - 1) {
         console.log(`Waiting ${ROTATE_DURATION} seconds before next cycle...`);
         await sleep(ROTATE_DURATION * 1000);
+      }
+
+      // in the last cycle withdraw funds from silo
+      if (i == cycles - 1) {
+        await wallet.withdrawFromSilo();
       }
     }
 
