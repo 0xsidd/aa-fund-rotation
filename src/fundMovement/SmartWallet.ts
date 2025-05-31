@@ -154,8 +154,8 @@ export class SonicSmartWallet {
     try {
       this.smartWalletInstance = smartWallet({
         chain: sonicChain,
-        sponsorGas: false,
-        gasless: false,
+        sponsorGas: true,
+        gasless: true,
       });
 
       await this.smartWalletInstance.connect({
